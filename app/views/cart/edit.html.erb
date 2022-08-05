@@ -1,0 +1,20 @@
+<h3>Products</h3>
+<table>
+    <tr>
+        <th>s no. </th>
+        <th>name </th>
+        <th>price </th>
+        <th>stock </th>
+    </tr>    
+     <% @cart.each do |cart| %>
+    <tr>
+        <td><%=cart.id %></td>
+        <td><%=cart.name %></td>
+        <td><%=cart.price %></td>
+
+       
+    </tr>
+    <% end %>
+
+
+</table>

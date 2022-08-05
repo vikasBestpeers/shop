@@ -1,0 +1,27 @@
+
+<h3>My cart</h3>
+<table>
+    <tr>
+        <th>s no. </th>
+        <th>name </th>
+        <th>price </th>
+        <th>stock </th>
+    </tr>    
+     <% @carts.each do |cart| %>
+    <tr>
+        <td><%=cart.id %></td>
+        <td><%=cart.pro_name %></td>
+        <td><%=cart.pro_price %></td>
+
+        <%=form_with model: cart, url: cart_path(cart.id), method: :PATCH do |form| %> 
+        
+        <td><%=form.number_field :pro_stock,value: cart.pro_stock, min: 1, max: Product.find(cart.product_id).stock, step: 1%></td>
+        <td><%=form.submit "update"%></td>
+        <%end%>
+        <td><%= button_to "Delete product", cart_path(cart.id), method: :DELETE %></td>
+       <td> <%= button_to('Delete product', cart_path(cart.id),   method: "delete", data: { confirm: 'Are you sure?', disable_with: 'loading...' }) %></td>
+    </tr>
+    <% end %>
+
+
+</table>

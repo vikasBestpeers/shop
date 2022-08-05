@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Shop</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <p class="notice"><%= notice %></p>
+    <p class="alert"><%= alert %></p>
+    
+    <%if user_signed_in? %>
+    <%= current_user.email%>
+    <%= link_to "log out", destroy_user_session_path, method: :delete%>
+    <%= link_to "account setings",  edit_user_registration_path%>
+      <%if current_user.role==true%>
+      <%= link_to "go to dashboard", seller_index_path%>
+      <% else %>
+      <%= link_to "go to dashboard", customer_index_path%>
+      <%= link_to "go to cart", cart_index_path%>
+      <%end%>
+    <%end%>
+    <%= yield %>
+  </body>
+</html>

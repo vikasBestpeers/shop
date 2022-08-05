@@ -1,0 +1,27 @@
+<h1>seller dashboard</h1>
+
+<%= link_to "add product", new_seller_path %>
+
+
+
+<br>
+<h3>my Products</h3>
+<table>
+    <tr>
+        <th>s no. </th>
+        <th>name </th>
+        <th>price </th>
+        <th>stock </th>
+    </tr>
+    <% @products.each do |product| %>
+    <tr>
+        <td><%=product.id %></td>
+        <td><%=product.name %></td>
+        <td><%=product.price %></td>
+        <td><%=product.stock %></td>
+        <td><%= link_to "Edit", edit_seller_path(product.id) %></td>
+        <td><%= link_to "Delete", seller_path(product.id), method: :"delete" %></td>
+    </tr>
+    <% end %>
+</table>
+
