@@ -1,11 +1,13 @@
 
 <h3>My cart</h3>
+<%@total=0%>
 <table>
     <tr>
         <th>s no. </th>
         <th>name </th>
         <th>price </th>
-        <th>stock </th>
+        <th>Quantity </th>
+        <th>Sub total </th>
     </tr>    
      <% @carts.each do |cart| %>
     <tr>
@@ -16,12 +18,19 @@
         <%=form_with model: cart, url: cart_path(cart.id), method: :PATCH do |form| %> 
         
         <td><%=form.number_field :pro_stock,value: cart.pro_stock, min: 1, max: Product.find(cart.product_id).stock, step: 1%></td>
+        <td><%=cart.subtotal %></td>
         <td><%=form.submit "update"%></td>
         <%end%>
-        <td><%= button_to "Delete product", cart_path(cart.id), method: :DELETE %></td>
+        <%@total=@total+cart.subtotal%>
+        <%# <td><%= button_to "Delete product", cart_path(cart.id), method: :DELETE %></td> %>
        <td> <%= button_to('Delete product', cart_path(cart.id),   method: "delete", data: { confirm: 'Are you sure?', disable_with: 'loading...' }) %></td>
     </tr>
     <% end %>
 
 
 </table>
+<br>
+
+<h2>Total: <%=@total%></h2>
+
+<%= link_to "place order",  order_index_path, method: :post%>

@@ -1,0 +1,5 @@
+<br>
+<% @orders.each do |order|%>
+    <%= link_to "order with order id '#{order.id}'", order_path(order)%>
+    <br>
+<%end%>

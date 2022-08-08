@@ -9,7 +9,7 @@ class CartController < ApplicationController
         @oldstock=@cart.pro_stock
         @product=Product.find(@cart.product_id)
         if @cart.update(stock_params)
-
+            @cart.subtotal=@cart.pro_price*@cart.pro_stock
             if @oldstock < @cart.pro_stock 
                 @newstock=@cart.pro_stock-@oldstock
                 @product.stock= @product.stock-@newstock
