@@ -15,7 +15,7 @@ class SellerController < ApplicationController
     def create
         @user=current_user 
         @product=@user.products.new(product_params)
-
+      byebug
         if @product.save
         redirect_to  seller_index_path
         else

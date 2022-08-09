@@ -1,52 +1,47 @@
-class SellerController < ApplicationController
-    def index
-      current_user=User.first
-        @user = current_user
-        @products = @user.products
-    end
+class Api::V1::SellerController < Api::V1::ApiController
+  # skip_before_action :verify_authenticity_token
 
-    def show
-        @product=Product.find(params[:id])
-    end
 
-    def new
-        @product=Product.new
-    end
-
-    def create
-        @user=current_user 
-        @product=@user.products.new(product_params)
-
-        if @product.save
-        redirect_to  seller_index_path
-        else
-            render :new
-        end
-    end
-
-    def edit
-        @product = Product.find(params[:id])
-      end
+  def index
+    @current_user=User.last
+    @products = @current_user.products
+    render json: @products
+  end
+  
+  def create
+    @current_user=User.last
+    @user=current_user 
+    @product=@user.products.new(product_params)
+    # byebug
+    if @product.save
+      redirect_to  api_v1_seller_index_path 
     
-      def update
-        @product = Product.find(params[:id])
-    
-        if @product.update(product_params)
-          redirect_to seller_index_path
-        else
-          render :edit
-        end
-      end
-    
-      def destroy
-        @product = Product.find(params[:id])
-        @product.destroy
-    
-        redirect_to seller_index_path
-      end
+    end
+  end
 
-    private
+  def update
+    @product = Product.find(params[:id])
+
+    if @product.update(product_params)
+      redirect_to  api_v1_seller_index_path 
+    end
+  end
+  
+  
+  
+  def destroy
+    # byebug
+    @product = Product.find(params[:id])
+    @product.destroy
+    redirect_to  api_v1_seller_index_path 
+    
+
+  end
+
+
+
+  private
     def product_params
-      params.require(:product).permit(:name, :stock, :price)
+      params.permit(:name, :stock, :price)
     end
 end
