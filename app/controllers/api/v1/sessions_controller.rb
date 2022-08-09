@@ -7,7 +7,7 @@ class Api::V1::SessionsController < Api::V1::ApiController
         if  @user && @user.valid_password?(params[:password])
             @user.token=@token
             if@user.save
-                render json: @user.token
+                
             end
         else
             render json: {massage:"not log in"}
