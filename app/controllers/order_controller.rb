@@ -10,6 +10,7 @@ class OrderController < ApplicationController
             @total=@total+cart.subtotal
         end
         @order=current_user.orders.new(total_price:@total)
+        @user=User.find(current_user.id)
         
         if @order.save
             @carts.each do |cart|
@@ -18,8 +19,15 @@ class OrderController < ApplicationController
                 @subtotal=cart.subtotal
                 @order_details=@order.order_details.new(product_id: @product_id, stock: @stock, subtotal: @subtotal)
                 @order_details.save
+                
+                @product=Product.find(cart.product_id)
+                @product.stock= @product.stock-cart.pro_stock
+                @product.save
             end
+            
             @carts.destroy_all
+
+
             redirect_to  order_index_path 
             
         end

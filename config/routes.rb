@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   resources :cart
   resources :order
 
-  namespace :api do
+  namespace :api, defaults: { format: :json} do
     namespace :v1 do
       resources :seller
       resources :sessions

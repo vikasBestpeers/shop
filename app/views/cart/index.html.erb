@@ -22,7 +22,6 @@
         <td><%=form.submit "update"%></td>
         <%end%>
         <%@total=@total+cart.subtotal%>
-        <%# <td><%= button_to "Delete product", cart_path(cart.id), method: :DELETE %></td> %>
        <td> <%= button_to('Delete product', cart_path(cart.id),   method: "delete", data: { confirm: 'Are you sure?', disable_with: 'loading...' }) %></td>
     </tr>
     <% end %>

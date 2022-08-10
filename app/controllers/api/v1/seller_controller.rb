@@ -5,7 +5,7 @@ class Api::V1::SellerController < Api::V1::ApiController
   def index
     @current_user=User.last
     @products = @current_user.products
-    render json: @products
+    # render :index
     
   end
   

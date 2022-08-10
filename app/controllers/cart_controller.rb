@@ -1,6 +1,8 @@
 class CartController < ApplicationController
     def index
-        @carts=Cart.all
+        @user=current_user
+        @carts=@user.carts.all
+        
     end
 
 
@@ -32,9 +34,6 @@ class CartController < ApplicationController
         @cart= @user.carts.create(cart_params)
         if @cart.save
             @cart.subtotal=(@cart.pro_stock).to_i*(@cart.pro_price).to_i
-            @product=Product.find(@cart.product_id)
-            @product.stock= @product.stock-@cart.pro_stock
-            @product.save
             @cart.save
             redirect_to customer_index_path
         end
