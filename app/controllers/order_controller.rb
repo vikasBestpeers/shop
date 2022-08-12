@@ -1,4 +1,5 @@
 class OrderController < ApplicationController
+    load_and_authorize_resource
     def index
         @orders=current_user.orders
     end
@@ -25,7 +26,7 @@ class OrderController < ApplicationController
                 @product.save
             end
             
-            @carts.destroy_all
+             @carts.destroy_all
 
 
             redirect_to  order_index_path 
