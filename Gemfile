@@ -5,10 +5,12 @@ ruby '3.0.4'
 gem 'devise', '~> 4.8', '>= 4.8.1'
 gem 'bcrypt', '~> 3.1', '>= 3.1.12'
 gem 'cancancan', '~> 3.4'
+gem 'pg'
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
 gem 'rails', '~> 6.1.6', '>= 6.1.6.1'
 # Use sqlite3 as the database for Active Record
-gem 'sqlite3', '~> 1.4'
+# gem 'sqlite3', '~> 1.4'
 # Use Puma as the app server
 gem 'puma', '~> 5.0'
 # Use SCSS for stylesheets
