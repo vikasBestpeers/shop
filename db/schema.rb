@@ -12,6 +12,9 @@
 
 ActiveRecord::Schema.define(version: 2022_08_09_094212) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "carts", force: :cascade do |t|
     t.string "pro_name"
     t.decimal "pro_price"
@@ -28,7 +31,7 @@ ActiveRecord::Schema.define(version: 2022_08_09_094212) do
     t.integer "product_id"
     t.integer "stock"
     t.integer "subtotal"
-    t.integer "order_id"
+    t.bigint "order_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["order_id"], name: "index_order_details_on_order_id"
@@ -36,7 +39,7 @@ ActiveRecord::Schema.define(version: 2022_08_09_094212) do
 
   create_table "orders", force: :cascade do |t|
     t.decimal "total_price"
-    t.integer "user_id"
+    t.bigint "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_orders_on_user_id"
@@ -46,7 +49,7 @@ ActiveRecord::Schema.define(version: 2022_08_09_094212) do
     t.string "name"
     t.integer "stock"
     t.decimal "price"
-    t.integer "user_id"
+    t.bigint "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_products_on_user_id"
