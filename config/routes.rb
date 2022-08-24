@@ -9,10 +9,11 @@ Rails.application.routes.draw do
 
   namespace :api, defaults: { format: :json} do
     namespace :v1 do
-      resources :seller
+      resources :seller do
       resources :sessions
     end
   end
+end
   # resources :product
   # get "/customer", to: "customer#index"
   # get "home", to: "homepage#homepage"
