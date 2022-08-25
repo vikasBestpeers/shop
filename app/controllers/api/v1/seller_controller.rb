@@ -23,11 +23,8 @@ class Api::V1::SellerController < Api::V1::ApiController
   end
   
   def destroy
-    byebug
-    @product = Product.find(params[:id])
-    @product.destroy
-    redirect_to  api_v1_seller_index_path 
-    
+    @product = Product.all
+    @product.destroy_all
   end
 
   private

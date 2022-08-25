@@ -9,8 +9,9 @@ Rails.application.routes.draw do
 
   namespace :api, defaults: { format: :json} do
     namespace :v1 do
-      resources :seller do
+      resources :seller, exept: :destroy do
       resources :sessions
+      get "/delete_all", to: 'seller#destroy'
     end
   end
 end
